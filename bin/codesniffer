@@ -1,0 +1,22 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+RULESET="ruleset.xml"
+EXTENSIONS="php"
+
+# Take default ninjify ruleset, if relative ruleset.xml is not present
+if [ ! -f ${RULESET} ]; then
+    RULESET=${DIR}/../ninjify/coding-standard/ruleset.xml
+fi
+
+# Show installed coding standards
+${DIR}/phpcs -i
+
+# Run sniffing
+if [ -z "$1" ]; then
+    # Run codesniffer with default args
+    ${DIR}/phpcs --standard=${RULESET} --extensions=${EXTENSIONS} --encoding=utf-8 --colors -nsp src app tests
+else
+    # Run codesniffer
+    ${DIR}/phpcs --standard=${RULESET} --extensions=${EXTENSIONS} --encoding=utf-8 --colors -nsp $@
+fi

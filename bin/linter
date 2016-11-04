@@ -1,0 +1,11 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+if [ -z "$1" ]; then
+    # Run linter with default args
+    ${DIR}/parallel-lint src app tests
+else
+    # Run linter
+    ${DIR}/parallel-lint $@
+fi
