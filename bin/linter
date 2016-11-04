@@ -1,10 +1,14 @@
 #!/bin/bash
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+FOLDERS=()
 
 if [ -z "$1" ]; then
     # Run linter with default args
-    ${DIR}/parallel-lint src app tests
+    [ -d "app" ] && FOLDERS+=('app')
+    [ -d "src" ] && FOLDERS+=('src')
+    [ -d "tests" ] && FOLDERS+=('tests')
+    ${DIR}/parallel-lint ${FOLDERS[*]}
 else
     # Run linter
     ${DIR}/parallel-lint $@
