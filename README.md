@@ -1,4 +1,4 @@
-# Quality assurance (qa) 
+# Quality assurance (QA) 
 
 Quality assurance for your PHP projects
 
