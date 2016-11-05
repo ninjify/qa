@@ -19,8 +19,8 @@ if [ -z "$1" ]; then
     [ -d "app" ] && FOLDERS+=('app')
     [ -d "src" ] && FOLDERS+=('src')
     [ -d "tests" ] && FOLDERS+=('tests')
-    ${DIR}/phpcs --standard=${RULESET} --extensions=${EXTENSIONS} --encoding=utf-8 --colors -nsp ${FOLDERS[*]}
+    ${DIR}/phpcs --standard="${RULESET}" --extensions="${EXTENSIONS}" --encoding=utf-8 --colors -nsp ${FOLDERS[*]}
 else
     # Run codesniffer
-    ${DIR}/phpcs --standard=${RULESET} --extensions=${EXTENSIONS} --encoding=utf-8 --colors -nsp $@
+    ${DIR}/phpcs --standard="${RULESET}" --extensions="${EXTENSIONS}" --encoding=utf-8 --colors -nsp $@
 fi
