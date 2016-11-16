@@ -76,9 +76,13 @@ final class CodeSniffer extends AbstractScript
             return;
         }
 
+        if (isset($this->config['ruleset'])) {
+            putenv(sprintf('RULESET=%s', $this->config['ruleset']));
+        }
+
         $folders = $this->config['folders'];
         $binDir = $this->event->getComposer()->getConfig()->get('bin-dir');
-        passthru(sprintf('%s/codesniffer %s', $binDir, implode(' ', $folders)));
+        passthru(trim(sprintf('%s/codesniffer %s', $binDir, implode(' ', $folders))));
     }
 
 }

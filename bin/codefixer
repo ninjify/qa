@@ -1,13 +1,17 @@
 #!/bin/bash
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-RULESET="ruleset.xml"
-EXTENSIONS='php,php3,php4,php5,phtml,phpt'
-EXCLUDE_FOLDERS='*/temp,*/tmp'
+RULESET=${RULESET:='ruleset.xml'}
+EXTENSIONS=${EXTENSIONS:='php,php3,php4,php5,phtml,phpt'}
+EXCLUDE_FOLDERS=${EXCLUDE_FOLDERS:='*/temp,*/tmp'}
 FOLDERS=()
 
 # Take default ninjify ruleset, if relative ruleset.xml is not present
-if [ ! -f ${RULESET} ]; then
+if [ -f ${DIR}/../ninjify/coding-standard/${RULESET} ]; then
+    RULESET=${DIR}/../ninjify/coding-standard/${RULESET}
+elif [ -f ${DIR}/../ninjify/coding-standard/ruleset-${RULESET}.xml ]; then
+    RULESET=${DIR}/../ninjify/coding-standard/ruleset-${RULESET}.xml
+elif [ ! -f ${RULESET} ]; then
     RULESET=${DIR}/../ninjify/coding-standard/ruleset.xml
 fi
 
