@@ -2,7 +2,8 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 RULESET="ruleset.xml"
-EXTENSIONS="php"
+EXTENSIONS='php,php3,php4,php5,phtml,phpt'
+EXCLUDE_FOLDERS='*/temp,*/tmp'
 FOLDERS=()
 
 # Take default ninjify ruleset, if relative ruleset.xml is not present
@@ -19,8 +20,8 @@ if [ -z "$1" ]; then
     [ -d "app" ] && FOLDERS+=('app')
     [ -d "src" ] && FOLDERS+=('src')
     [ -d "tests" ] && FOLDERS+=('tests')
-    ${DIR}/phpcs --standard="${RULESET}" --extensions="${EXTENSIONS}" --encoding=utf-8 --colors -nsp ${FOLDERS[*]}
+    ${DIR}/phpcs --standard="${RULESET}" --ignore="${EXCLUDE_FOLDERS}" --extensions="${EXTENSIONS}" --encoding=utf-8 --colors -nsp ${FOLDERS[*]}
 else
     # Run codesniffer
-    ${DIR}/phpcs --standard="${RULESET}" --extensions="${EXTENSIONS}" --encoding=utf-8 --colors -nsp $@
+    ${DIR}/phpcs --standard="${RULESET}" --ignore="${EXCLUDE_FOLDERS}" --extensions="${EXTENSIONS}" --encoding=utf-8 --colors -nsp $@
 fi
