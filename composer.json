@@ -1,7 +1,7 @@
 {
   "name": "ninjify/qa",
   "description": "Quality assurance for your PHP projects",
-  "keywords": ["quality", "assurance", "codesniffer", "linter", "php"],
+  "keywords": ["quality", "assurance", "codesniffer", "linter", "php", "nette"],
   "type": "library",
   "license": ["MIT"],
   "homepage": "https://github.com/ninjify/qa",
@@ -13,7 +13,8 @@
   ],
   "require": {
     "php": ">=5.6",
-    "ninjify/coding-standard": "^0.2.0",
+    "ninjify/coding-standard": "^0.2.1",
+    "nette/tester": "^1.7.1",
     "jakub-onderka/php-console-highlighter": "^0.3.2",
     "jakub-onderka/php-parallel-lint": "^0.9.2"
   },
