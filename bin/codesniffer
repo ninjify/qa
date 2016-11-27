@@ -6,13 +6,25 @@ EXTENSIONS=${EXTENSIONS:='php,php3,php4,php5,phtml,phpt'}
 EXCLUDE_FOLDERS=${EXCLUDE_FOLDERS:='*/temp,*/tmp'}
 FOLDERS=()
 
-# Take default ninjify ruleset, if relative ruleset.xml is not present
-if [ -f ${DIR}/../ninjify/coding-standard/${RULESET} ]; then
-    RULESET=${DIR}/../ninjify/coding-standard/${RULESET}
-elif [ -f ${DIR}/../ninjify/coding-standard/ruleset-${RULESET}.xml ]; then
-    RULESET=${DIR}/../ninjify/coding-standard/ruleset-${RULESET}.xml
-elif [ ! -f ${RULESET} ]; then
-    RULESET=${DIR}/../ninjify/coding-standard/ruleset.xml
+# Try several ruleset paths:
+# - <package-dir>/$RULESET
+# - <package-dir>/$RULESET.xml
+# - <vendor-dir>/ninjify/coding-standard/$RULESET
+# - <vendor-dir>/ninjify/coding-standard/$RULESET.xml
+# - $RULESET
+# - <vendor-dir>/ninjify/coding-standard/ruleset.xml (fallback)
+if [ -f "${DIR}/../../${RULESET}" ]; then
+    RULESET="${DIR}/../../${RULESET}"
+elif [ -f "${DIR}/../../${RULESET}.xml" ]; then
+    RULESET="${DIR}/../ninjify/coding-standard/${RULESET}.xml"
+elif [ -f "${DIR}/../ninjify/coding-standard/${RULESET}" ]; then
+    RULESET="${DIR}/../ninjify/coding-standard/${RULESET}"
+elif [ -f "${DIR}/../ninjify/coding-standard/ruleset-${RULESET}.xml" ]; then
+    RULESET="${DIR}/../ninjify/coding-standard/ruleset-${RULESET}.xml"
+elif [ ! -f "${RULESET}" ]; then
+    RULESET="${RULESET}"
+else
+    RULESET="${DIR}/../ninjify/coding-standard/ruleset.xml"
 fi
 
 # Show installed coding standards
