@@ -7,82 +7,82 @@ use Composer\Script\Event;
 final class CodeFixer extends AbstractScript
 {
 
-    /** @var Event */
-    private $event;
+	/** @var Event */
+	private $event;
 
-    /** @var array */
-    private $config;
+	/** @var array */
+	private $config;
 
-    /**
-     * @param Event $event
-     * @param array $config
-     */
-    public function __construct(Event $event, array $config)
-    {
-        $this->event = $event;
-        $this->config = $config;
-    }
+	/**
+	 * @param Event $event
+	 * @param array $config
+	 */
+	public function __construct(Event $event, array $config)
+	{
+		$this->event = $event;
+		$this->config = $config;
+	}
 
-    /**
-     * API *********************************************************************
-     * *************************************************************************
-     */
+	/**
+	 * API *********************************************************************
+	 * *************************************************************************
+	 */
 
-    /**
-     * @param Event $event
-     * @return void
-     */
-    public static function execute(Event $event)
-    {
-        $extra = $event->getComposer()->getPackage()->getExtra();
+	/**
+	 * @param Event $event
+	 * @return void
+	 */
+	public static function execute(Event $event)
+	{
+		$extra = $event->getComposer()->getPackage()->getExtra();
 
-        if (!isset($extra['ninjify'])) {
-            $event->getIO()->writeError('You have to setup "ninjify" in "extra" section.');
+		if (!isset($extra['ninjify'])) {
+			$event->getIO()->writeError('You have to setup "ninjify" in "extra" section.');
 
-            return;
-        }
+			return;
+		}
 
-        if (!isset($extra['ninjify']['qa'])) {
-            $event->getIO()->writeError('You have to setup "qa" in "extra.ninjify" section.');
+		if (!isset($extra['ninjify']['qa'])) {
+			$event->getIO()->writeError('You have to setup "qa" in "extra.ninjify" section.');
 
-            return;
-        }
+			return;
+		}
 
-        if (!isset($extra['ninjify']['qa']['codefixer'])) {
-            $event->getIO()->writeError('You have to setup "codefixer" in "extra.ninjify.qa" section.');
+		if (!isset($extra['ninjify']['qa']['codefixer'])) {
+			$event->getIO()->writeError('You have to setup "codefixer" in "extra.ninjify.qa" section.');
 
-            return;
-        }
+			return;
+		}
 
-        // CodeFixer config
-        $config = $extra['ninjify']['qa']['codefixer'];
-        $script = new CodeFixer($event, $config);
-        $script->process();
-    }
+		// CodeFixer config
+		$config = $extra['ninjify']['qa']['codefixer'];
+		$script = new CodeFixer($event, $config);
+		$script->process();
+	}
 
-    /**
-     * IMPLEMENTATION **********************************************************
-     * *************************************************************************
-     */
+	/**
+	 * IMPLEMENTATION **********************************************************
+	 * *************************************************************************
+	 */
 
-    /**
-     * @return void
-     */
-    public function process()
-    {
-        if (!isset($this->config['folders']) || empty($this->config['folders'])) {
-            $this->event->getIO()->writeError('You have to add any folders in "extra.ninjify.qa.codefixer.folders" section.');
+	/**
+	 * @return void
+	 */
+	public function process()
+	{
+		if (!isset($this->config['folders']) || empty($this->config['folders'])) {
+			$this->event->getIO()->writeError('You have to add any folders in "extra.ninjify.qa.codefixer.folders" section.');
 
-            return;
-        }
+			return;
+		}
 
-        if (isset($this->config['ruleset'])) {
-            putenv(sprintf('RULESET=%s', $this->config['ruleset']));
-        }
+		if (isset($this->config['ruleset'])) {
+			putenv(sprintf('RULESET=%s', $this->config['ruleset']));
+		}
 
-        $folders = $this->config['folders'];
-        $binDir = $this->event->getComposer()->getConfig()->get('bin-dir');
-        passthru(trim(sprintf('%s/codefixer %s', $binDir, implode(' ', $folders))));
-    }
+		$folders = $this->config['folders'];
+		$binDir = $this->event->getComposer()->getConfig()->get('bin-dir');
+		passthru(trim(sprintf('%s/codefixer %s', $binDir, implode(' ', $folders))));
+	}
 
 }
