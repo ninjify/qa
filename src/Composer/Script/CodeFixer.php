@@ -83,7 +83,7 @@ final class CodeFixer extends AbstractScript
 		$folders = $this->config['folders'];
 		$binDir = $this->event->getComposer()->getConfig()->get('bin-dir');
 		passthru(trim(sprintf('%s/codefixer %s', $binDir, implode(' ', $folders))), $return);
-		exit($return);
+		if ($return !== 0) exit($return);
 	}
 
 }

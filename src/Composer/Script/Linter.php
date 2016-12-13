@@ -79,7 +79,7 @@ final class Linter extends AbstractScript
 		$folders = $this->config['folders'];
 		$binDir = $this->event->getComposer()->getConfig()->get('bin-dir');
 		passthru(sprintf('%s/linter %s', $binDir, implode(' ', $folders)), $return);
-		exit($return);
+		if ($return !== 0) exit($return);
 	}
 
 }
