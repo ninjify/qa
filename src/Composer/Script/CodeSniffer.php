@@ -82,7 +82,8 @@ final class CodeSniffer extends AbstractScript
 
 		$folders = $this->config['folders'];
 		$binDir = $this->event->getComposer()->getConfig()->get('bin-dir');
-		passthru(trim(sprintf('%s/codesniffer %s', $binDir, implode(' ', $folders))));
+		passthru(trim(sprintf('%s/codesniffer %s', $binDir, implode(' ', $folders))), $return);
+		exit($return);
 	}
 
 }
