@@ -31,26 +31,11 @@ matrix:
 before_script:
   # Composer
   - travis_retry composer install --no-interaction
-  # Coverage
-  - if [[ "$TRAVIS_PHP_VERSION" == "7.0" && "$COMPOSER_FLAG" == "" ]]; then COVERAGE=1; fi
 
 script:
   # Quality Assurance
-  - composer run-script qa-linter
-  - composer run-script qa-codesniffer
-
-  # Nette\Tester
-  #- composer run-script qa-tester-info
-  #- composer run-script qa-tester
-
-  # Nette\Tester + CodeCoverage
-  #- if [ "$COVERAGE" != "" ]; then composer run-script qa-tester-coverage-info; fi
-  #- if [ "$COVERAGE" != "" ]; then composer run-script qa-tester-coverage; fi
-
-after_script:
-  # Coverage (Coveralls)
-  #- if [ "$COVERAGE" != "" ]; then wget https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coveralls.phar; fi
-  #- if [ "$COVERAGE" != "" ]; then php coveralls.phar --verbose --config tests/.coveralls.yml; fi
+  - vendor/bin/parallel-lint src
+  - vendor/bin/phpcs --standard=vendor/ninjify/coding-standard/ruleset.xml --encoding=utf-8 --colors -nsp src
 
 after_failure:
   # Print *.actual content
