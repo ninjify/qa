@@ -12,13 +12,13 @@
     }
   ],
   "require": {
-    "php": ">=5.6",
-    "ninjify/coding-standard": "^0.2.1",
+    "php": ">=7.1",
+    "ninjify/coding-standard": "^0.3.0",
     "jakub-onderka/php-console-highlighter": "^0.3.2",
     "jakub-onderka/php-parallel-lint": "^0.9.2"
   },
   "require-dev": {
-    "composer/composer": "^1.2.2"
+    "composer/composer": "^1.4.1"
   },
   "autoload": {
     "psr-4": {
