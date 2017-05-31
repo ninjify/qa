@@ -1,9 +1,10 @@
 # Quality assurance (QA) 
 
-Quality assurance for your PHP projects
+Quality assurance (`binaries`) for your PHP projects
 
 -----
 
+[![Build Status](https://img.shields.io/travis/ninjify/qa.svg?style=flat-square)](https://travis-ci.org/ninjify/qa)
 [![Downloads total](https://img.shields.io/packagist/dt/ninjify/qa.svg?style=flat-square)](https://packagist.org/packages/ninjify/qa)
 [![Latest stable](https://img.shields.io/packagist/v/ninjify/qa.svg?style=flat-square)](https://packagist.org/packages/ninjify/qa)
 
@@ -15,20 +16,18 @@ composer require --dev ninjify/qa
 
 ## Manual usage (bin)
 
-### CodeSniffer
+### CodeSniffer & CodeFixer
 
 Default folders are: `src`, `app`, `tests`
+Default extensions are: `php`, `php3`, `php4`, `php5`, `phtml`, `phpt`
+Default excluded folders are: `*/temp`, `*/tmp`
 
-By default is used `ruleset.xml` in root of your project. Otherwise, strict default one is used.
+By default is used `ruleset.xml` in library/project root of your project. Otherwise, strict default one is used.
 
 ```sh
 vendor/bin/codesniffer
 vendor/bin/codesniffer <folder1> <folder2>
 ```
-
-### CodeFixer
-
-Default folders are: `src`, `app`, `tests`
 
 ```sh
 vendor/bin/codefixer
@@ -44,55 +43,31 @@ vendor/bin/linter
 vendor/bin/linter <folder1> <folder2>
 ```
 
-## Composer scripts
-
-### Extra scripts [composer.json]
-You should define a special scripts to your `composer.json`.
-
-```json
-"scripts": {
-    "qa": [
-        "@qa-codesniffer",
-        "@qa-linter"
-    ],
-    "qa-codesniffer": [
-        "Ninjify\\Composer\\Script\\CodeSniffer::execute"
-    ],
-    "qa-codefixer": [
-        "Ninjify\\Composer\\Script\\CodeFixer::execute"
-    ],
-    "qa-linter": [
-        "Ninjify\\Composer\\Script\\Linter::execute"
-    ]
-}
-```
-
-### Extra parameters [composer.json]
-
-```json
-"extra": {
-    "ninjify": {
-        "qa": {
-            "codesniffer": {
-                "folders": ["app", "src", "test/cases"]
-            },
-            "codefixer": {
-                "folders": ["app", "src", "test/cases"]
-            },
-            "linter": {
-                "folders": ["app", "src", "test/cases"]
-            }
-        }
-    }
-}
-```
-
 ### Executing
 
 ```
 composer qa
 composer run qa
 composer run-script qa
+```
+
+### Composer
+
+```json
+{
+  "scripts": {
+    "qa": [
+      "linter src tests",
+      "codesniffer src tests"
+    ],
+    "tester": [
+      "tester -s -p php --colors 1 -c tests/php-unix.ini tests/cases"
+    ],
+    "tester-coverage": [
+      "tester -s -p php --colors 1 -c tests/php-unix.ini -d extension=xdebug.so --coverage ./coverage.xml --coverage-src ./src tests/cases "
+    ]
+  }
+}
 ```
 
 -----

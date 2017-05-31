@@ -1,45 +1,20 @@
 language: php
 
 php:
-  - 5.6
-  - 7.0
   - 7.1
-  - hhvm
-  - hhvm-nightly
 
 matrix:
   fast_finish: true
 
-  allow_failures:
-      - php: hhvm
-      - php: hhvm-nightly
-
   include:
-    - php: 5.6
-      env: COMPOSER_FLAG=--prefer-lowest
-    - php: 5.6
-      env: COMPOSER_FLAG=--prefer-stable
-    - php: 7.0
-      env: COMPOSER_FLAG=--prefer-lowest
-    - php: 7.0
-      env: COMPOSER_FLAG=--prefer-stable
     - php: 7.1
       env: COMPOSER_FLAG=--prefer-lowest
     - php: 7.1
       env: COMPOSER_FLAG=--prefer-stable
-
-before_script:
-  # Composer
-  - travis_retry composer install --no-interaction
 
 script:
-  # Quality Assurance
-  - vendor/bin/parallel-lint src
-  - vendor/bin/phpcs --standard=vendor/ninjify/coding-standard/ruleset.xml --encoding=utf-8 --colors -nsp src
-
-after_failure:
-  # Print *.actual content
-  - for i in $(find tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done
+  # Composer
+  - travis_retry composer install --no-interaction
 
 sudo: false
 
