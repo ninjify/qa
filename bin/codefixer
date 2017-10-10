@@ -36,8 +36,8 @@ if [ -z "$1" ]; then
     [ -d "app" ] && FOLDERS+=('app')
     [ -d "src" ] && FOLDERS+=('src')
     [ -d "tests" ] && FOLDERS+=('tests')
-    ${DIR}/phpcbf --standard="${RULESET}" --ignore="${EXCLUDE_FOLDERS}" --extensions="${EXTENSIONS}" --colors --encoding=utf-8 --no-patch -nsp ${FOLDERS[*]}
+    ${DIR}/phpcbf --standard="${RULESET}" --ignore="${EXCLUDE_FOLDERS}" --extensions="${EXTENSIONS}" --colors --encoding=utf-8 -nsp ${FOLDERS[*]}
 else
     # Run codefixer
-    ${DIR}/phpcbf --standard="${RULESET}" --ignore="${EXCLUDE_FOLDERS}" --extensions="${EXTENSIONS}" --colors --encoding=utf-8 --no-patch -nsp $@
+    ${DIR}/phpcbf --standard="${RULESET}" --ignore="${EXCLUDE_FOLDERS}" --extensions="${EXTENSIONS}" --colors --encoding=utf-8 -nsp $@
 fi
