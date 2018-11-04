@@ -2,7 +2,7 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 RULESET=${RULESET:='ruleset.xml'}
-EXTENSIONS=${EXTENSIONS:='php,php3,php4,php5,phtml,phpt'}
+EXTENSIONS=${EXTENSIONS:='php,phtml,phpt'}
 EXCLUDE_FOLDERS=${EXCLUDE_FOLDERS:='*/temp,*/tmp'}
 FOLDERS=()
 

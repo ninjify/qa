@@ -19,7 +19,7 @@ composer require --dev ninjify/qa
 ### CodeSniffer & CodeFixer
 
 Default folders are: `src`, `app`, `tests`
-Default extensions are: `php`, `php3`, `php4`, `php5`, `phtml`, `phpt`
+Default extensions are: `php`, `phtml`, `phpt`
 Default excluded folders are: `*/temp`, `*/tmp`
 
 By default is used `ruleset.xml` in library/project root of your project. Otherwise, strict default one is used.
@@ -47,6 +47,7 @@ vendor/bin/linter <folder1> <folder2>
 
 ```
 composer qa
+composer qa <folder>
 composer run qa
 composer run-script qa
 ```
