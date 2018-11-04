@@ -13,7 +13,7 @@
   ],
   "require": {
     "php": ">=7.1",
-    "ninjify/coding-standard": "^0.7.0",
+    "ninjify/coding-standard": "^0.8.0",
     "jakub-onderka/php-console-highlighter": "^0.4.0",
     "jakub-onderka/php-parallel-lint": "^1.0.0"
   },
@@ -26,7 +26,7 @@
   ],
   "extra": {
     "branch-alias": {
-      "dev-master": "0.8.x-dev"
+      "dev-master": "0.9.x-dev"
     }
   }
 }
