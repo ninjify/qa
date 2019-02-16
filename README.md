@@ -60,12 +60,6 @@ composer run-script qa
     "qa": [
       "linter src tests",
       "codesniffer src tests"
-    ],
-    "tester": [
-      "tester -s -p php --colors 1 -c tests/php-unix.ini tests/cases"
-    ],
-    "tester-coverage": [
-      "tester -s -p php --colors 1 -c tests/php-unix.ini -d extension=xdebug.so --coverage ./coverage.xml --coverage-src ./src tests/cases "
     ]
   }
 }
