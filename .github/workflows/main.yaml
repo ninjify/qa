@@ -15,7 +15,7 @@ env:
 
 jobs:
   install:
-    name: "Quality assurance"
+    name: "Testing"
     runs-on: "${{ matrix.operating-system }}"
 
     strategy:
