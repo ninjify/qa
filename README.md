@@ -23,15 +23,15 @@ Website ðŸš€ <a href="https://contributte.org">contributte.org</a> | Contact ðŸ‘
 To install latest version of `ninjify/qa` use [Composer](https://getcomposer.com).
 
 ```
-composer install ninjify/qa
+composer require ninjify/qa
 ```
 
 ## Versions
 
 | State       | Version | Branch   | PHP      |
 |-------------|---------|----------|----------|
-| dev         | `^0.13` | `master` | `>=7.3` | 
-| stable      | `^0.12` | `master` | `>=7.1` |
+| dev         | `^0.13` | `master` | `>=7.2` | 
+| stable      | `^0.12` | `master` | `>=7.2` |
 
 ## Documentation
 
