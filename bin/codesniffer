@@ -28,7 +28,7 @@ else
 fi
 
 # Show installed coding standards
-${DIR}/phpcs -i
+[[ -z "${CI}" ]] && ${DIR}/phpcs -i
 
 # Run sniffing
 if [ -z "$1" ]; then
