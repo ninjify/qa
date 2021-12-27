@@ -1,6 +1,15 @@
 #!/bin/bash
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SOURCE=${BASH_SOURCE[0]:-$0}
+
+if [[ ${SOURCE} == *ninjify/qa/bin/linter ]]; then
+    # vendor/ninjify/qa/bin/linter
+    DIR="$(cd "$(dirname $(dirname $(dirname $(dirname "${SOURCE}"))))/bin" && pwd)"
+else 
+    # vendor/bin/linter
+    DIR="$(cd "$(dirname "${SOURCE}")" && pwd)"
+fi
+
 EXTENSIONS=${EXTENSIONS:='php,php3,php4,php5,phtml,phpt'}
 EXCLUDE_FOLDERS=${EXCLUDE_FOLDERS:='vendor'}
 FOLDERS=()

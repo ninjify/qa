@@ -1,6 +1,15 @@
 #!/bin/bash
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SOURCE=${BASH_SOURCE[0]:-$0}
+
+if [[ ${SOURCE} == *ninjify/qa/bin/codefixer ]]; then
+    # vendor/ninjify/qa/bin/codefixer
+    DIR="$(cd "$(dirname $(dirname $(dirname $(dirname "${SOURCE}"))))/bin" && pwd)"
+else 
+    # vendor/bin/codefixer
+    DIR="$(cd "$(dirname "${SOURCE}")" && pwd)"
+fi
+
 RULESET=${RULESET:='ruleset.xml'}
 EXTENSIONS=${EXTENSIONS:='php,phtml,phpt'}
 EXCLUDE_FOLDERS=${EXCLUDE_FOLDERS:='*/temp,*/tmp'}
