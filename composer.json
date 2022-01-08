@@ -13,7 +13,7 @@
   ],
   "require": {
     "php": ">=7.2",
-    "ninjify/coding-standard": "^0.11.0",
+    "ninjify/coding-standard": "^0.12.0",
     "php-parallel-lint/php-parallel-lint": "^1.2.0"
   },
   "minimum-stability": "dev",
